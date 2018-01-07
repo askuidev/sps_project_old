@@ -2,6 +2,7 @@ import * as React from 'react';
 import AccountDetails from './AccountDetails';
 import AssetAllocation from './AssetAllocation';
 import { ActionDetaisEntity, AssetAllocationEntity } from '../types';
+import App from '../tableapp/src/App';
 
 interface SPSProps {
   actionDetailsEntity?: ActionDetaisEntity;
@@ -45,8 +46,7 @@ export default class SPS extends React.Component<SPSProps, {}> {
         </div>
         <div className="accountDetailsTable">
           <div className="row">
-          account details tables...
-            {/*<AllocationTableContainer />*/}
+            <App />
           </div>
         </div>
       </section>
