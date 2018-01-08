@@ -1,4 +1,5 @@
-const baseUrl = 'http://5a44fb44d0544c0012af57ac.mockapi.io';
+const baseUrl = `http://localhost:5000`;
+
 const config = {
     'dev': {
         baseUrl: baseUrl,

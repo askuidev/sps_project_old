@@ -10,7 +10,6 @@ import Table from './common/Table';
 import TableControls from './common/Table/TableControls';
 import Panel from './common/Panel';
 import AdjustCashModal from './AdjustCashModal';
-import { Icon } from 'react-fa';
 import {
   TargetAllocationProps,
   TargetAllocationState,
@@ -84,10 +83,12 @@ class TargetAllocationTable extends React.Component<
             />
           </div>
           <div className="targetAllocationTableControls">
-            <span className="pull-right">
-              <button className="btn btn-transparent cancel-btn">
-                Cancel <Icon name="angle-right angle-icon" />
+            <span className="pull-left">
+              <button className="btn btn-transparent color-light-blue cancel-btn">
+                Cancel 
               </button>
+            </span>
+            <span className="pull-right">
               <button className="btn btn-transparent color-light-blue remove-security-btn">
                 Remove Security Target
               </button>
