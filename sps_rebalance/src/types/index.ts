@@ -159,6 +159,7 @@ export interface ModalProps {
   showModal?: boolean;
   onModalHide?: () => void;
   onSubmitClick?: () => void;
+  draggable?: boolean;
 }
 
 export interface CheckboxProps {

@@ -62,6 +62,7 @@ class AdjustCashModal extends React.Component<AdjustCashModalProps, AdjustCashMo
                     showModal={showAdjustCashModal}
                     onModalHide={this.onModalHide}
                     onSubmitClick={this.onSubmitClick}
+                    draggable={true}
                 >
                     <AdjustCashForm
                         {...this.state}
