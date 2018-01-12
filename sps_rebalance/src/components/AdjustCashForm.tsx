@@ -3,6 +3,9 @@ import ButtonGroup from './common/ButtonGroup';
 const MdRefresh = require('react-icons/lib/md/refresh');
 import { AdjustCashFormProps } from '../types';
 
+/**
+ * AdjustCashForm - A form component for adjust cash data
+ */
 class AdjustCashForm extends React.Component<AdjustCashFormProps, {}> {
     render() {
         const {

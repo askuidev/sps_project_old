@@ -4,6 +4,9 @@ import TargetAllocationTable from './TargetAllocationTable';
 import DifferenceAllocationTable from './DifferenceAllocationTable';
 import Panel from './common/Panel';
 
+/**
+ * AllocationTableContainer - container for the Allocation Data Table
+ */
 class AllocationTableContainer extends React.Component<{}, {}> {
     render() {
         return (

@@ -4,24 +4,29 @@ const { Modal } = require('react-bootstrap');
 import { ModalProps } from '../../../types';
 
 class ReactModal extends React.Component<ModalProps, {}> {
+    // callback function when Modal hide event occurs
     onModalHide = () => {
         const { onModalHide } = this.props;
         if (onModalHide) { onModalHide(); }
     }
+    // callback function when Modal click event occurs
     onClick = () => {
         const { onSubmitClick } = this.props;
         if (onSubmitClick) { onSubmitClick(); }
     }
+    // rendering the modal component based on the props
     renderModal() {
         const {
           children,
           titleText = 'Title',
-          showModal
+          showModal,
+          backdrop = true,
         } = this.props;
         return (
-            <Modal 
-                dialogClassName="adjustCashModal clearfix" 
-                show={showModal} 
+            <Modal
+                dialogClassName="adjustCashModal clearfix"
+                show={showModal}
+                backdrop={backdrop}
                 onHide={this.onModalHide}
             >
                 <Modal.Header closeButton={true}>
@@ -43,10 +48,11 @@ class ReactModal extends React.Component<ModalProps, {}> {
 
     }
     render() {
+        // adding draggable feature to the modal component based on the draggable prop
         return this.props.draggable ? (
             <Draggable>
                 {this.renderModal()}
-            </Draggable> 
+            </Draggable>
         ) : (
             this.renderModal()
         );

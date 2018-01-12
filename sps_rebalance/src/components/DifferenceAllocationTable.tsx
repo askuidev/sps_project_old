@@ -9,10 +9,16 @@ import {
   DiffAllocationTableProps
 } from '../types';
 
+
+/**
+ * TableRow - Table row component for the table
+ */
 class TableRow extends React.Component<DiffAllocationTableRowProps, {}> {
+    // creates inline element style for the element
     getStyle(prop: string, value: string) {
         return getStyle({ prop, value });
     }
+    // creates inline element style for the element
     getColorBox(color: string) {
         return <span className="square40" style={this.getStyle('backgroundColor', color)} />;
     }
@@ -28,14 +34,20 @@ class TableRow extends React.Component<DiffAllocationTableRowProps, {}> {
     }
 }
 
+/**
+ * DifferenceAllocationTable - table for the assetData api
+ */
 class DifferenceAllocationTable extends React.Component<DiffAllocationTableProps, {}> {
+    // first time calling the assetData api to load assetData
     componentWillMount() {
         this.props.getAssetData();
     }
+    // rendering table rows from the assetData array
     renderRows() {
         const { assetData } = this.props;
         return assetData && assetData.map((row, index) => <TableRow key={index} {...row} />);
     }
+    // creates inline element style for the element
     getStyle(prop: string, value: string | number) {
         return getStyle({ prop, value });
     }

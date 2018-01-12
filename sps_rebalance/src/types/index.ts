@@ -1,3 +1,4 @@
+// PropTypes for TableRow Data
 export interface TableRowDataProps {
   description: string;
   adjustCash: boolean;
@@ -13,6 +14,7 @@ export interface TableRowDataProps {
   driftPer: string;
 }
 
+// PropTypes for TargetAllocationTable component
 export interface TargetAllocationProps {
   getAllocationData: () => void;
   handleAdjustCashModal: (props: AdjustCashModalEntity) => void;
@@ -25,43 +27,51 @@ export interface TargetAllocationProps {
   showAdjustCashModal: boolean;
 }
 
+// PropTypes for component state of TargetAllocationTable component
 export interface TargetAllocationState {
   leftGroupActive?: string;
   middleGroupActive?: string;
 }
 
+// PropTypes for AdjustCashModal Data
 export interface AdjustCashModalEntity {
   type: string;
   data: any;
 }
 
+// PropTypes for changed allocationData fields
 export interface ChangeAllocationData {
   value: string;
   id: string;
   field: string;
 }
 
+// PropTypes for asset data
 export interface AssetDataProps {
   color: string;
   assetClass: string;
   difference: string;
 }
 
+// PropTypes for DiffAllocationTable component
 export interface DiffAllocationTableProps {
   assetData?: AssetDataProps[];
   getAssetData: () => {};
 }
 
+// PropTypes for DiffAllocationTableRow
 export interface DiffAllocationTableRowProps {
   color?: string;
   assetClass?: string;
   difference?: string;
 }
 
+// PropTypes for callback function
 export interface CallbackProps {
   (params: object): void;
 }
 
+// PropTypes for TableRow component props
 export interface TableRowEntity {
   rowData?: TableRowDataProps;
   fieldType?: string;
@@ -69,27 +79,33 @@ export interface TableRowEntity {
   onDataChange?: CallbackProps;
 }
 
+// PropTypes for TableRow component state
 export interface TableRowState {
   targetPer?: string;
 }
 
+// PropTypes for callback event object
 export interface MyEventTarget extends EventTarget {
   value: string;
 }
 
+// PropTypes for callback event data
 export interface MyFormEvent extends React.FormEvent<HTMLInputElement> {
   target: MyEventTarget;
 }
 
+// PropTypes for TableFooter component props
 export interface TableFooterProps {
   allocationData?: TableRowDataProps[];
   searchText?: string;
 }
 
+// PropTypes for TableFooter component state
 export interface TableFooterState {
   searchText: string;
 }
 
+// PropTypes for TableControls component props
 export interface TableControlsProps {
   leftGroupActive?: string;
   middleGroupActive?: string;
@@ -97,12 +113,14 @@ export interface TableControlsProps {
   onMiddleGroupClick?: (middleGroupActive: string) => void;
 }
 
+// PropTypes for TableCel of TableBody
 export interface TableCellProps {
   value?: string;
   id?: string | number;
   field?: string;
 }
 
+// PropTypes for TableBody component props
 export interface TableBodyProps {
   allocationData?: TableRowDataProps[];
   fieldType?: string;
@@ -110,11 +128,13 @@ export interface TableBodyProps {
   onDataChange?: (params: TableCellProps) => void;
 }
 
+// PropTypes for NoDataRow component props
 export interface NoDataRowProps {
   colSpan: number;
   message: string;
 }
 
+// PropTypes for Table component props
 export interface TableProps {
   tableClass?: string;
   fieldType?: string;
@@ -123,6 +143,7 @@ export interface TableProps {
   onDataChange?: (params: TableCellProps) => void;
 }
 
+// PropTypes for ButtonGroup component props
 export interface ButtonGroupProps {
   buttonType?: string;
   withIcons?: boolean;
@@ -139,6 +160,7 @@ export interface ButtonGroupProps {
   onClearClick?: () => void;
 }
 
+// PropTypes for Button element props
 export interface ButtonProps {
   text?: string;
   field?: string;
@@ -146,12 +168,14 @@ export interface ButtonProps {
   className?: string;
 }
 
+// PropTypes for Radio Button props
 export interface RadioBtnProps {
   name?: string;
   type?: string;
   text?: string;
 }
 
+// PropTypes for Modal component props
 export interface ModalProps {
   children?: any;
   mainClass?: string;
@@ -160,8 +184,10 @@ export interface ModalProps {
   onModalHide?: () => void;
   onSubmitClick?: () => void;
   draggable?: boolean;
+  backdrop?: boolean;
 }
 
+// PropTypes for Checkbox component props
 export interface CheckboxProps {
   id?: string | number;
   label?: string;
@@ -169,6 +195,7 @@ export interface CheckboxProps {
   onChange?: (id: string | number, e: object) => void;
 }
 
+// PropTypes for Panel component props
 export interface PanelProps {
   children?: any;
   mainClass?: string;
@@ -179,6 +206,7 @@ export interface PanelProps {
   subHeadingChildren?: any;
 }
 
+// PropTypes for AdjustCashForm component props
 export interface AdjustCashFormProps {
   buttonType?: string;
   actionType?: string;
@@ -195,17 +223,20 @@ export interface AdjustCashFormProps {
   onClearClick: () => void;
 }
 
+// PropTypes for AdjustCash Data props
 export interface AdjustCashDataProps {
   id: string | number;
   actionType: string;
   actionValue: string;
 }
 
+// PropTypes for handleAdjustCashModal function
 export interface HandleAdjustCashModalProps {
   type: string;
   data: string;
 }
 
+// PropTypes for AdjustCashModal component props
 export interface AdjustCashModalProps {
   allocationData: TableRowDataProps[];
   adjustCashData: AdjustCashDataProps;
@@ -216,6 +247,7 @@ export interface AdjustCashModalProps {
   updateAllocationData: (allocationData: TableRowDataProps[], props: AdjustCashDataProps) => void;
 }
 
+// PropTypes for AdjustCashModal component state
 export interface AdjustCashModalState {
   actionType: string;
   actionValue: string;

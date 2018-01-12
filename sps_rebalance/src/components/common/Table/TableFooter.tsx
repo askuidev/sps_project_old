@@ -19,6 +19,7 @@ class TableFooter extends React.Component<TableFooterProps, TableFooterState> {
             searchText: ''
         };
     }
+    // get search box input
     getSearchInput() {
         return (
           <div className="input-group allocationSearchInput">
@@ -35,12 +36,15 @@ class TableFooter extends React.Component<TableFooterProps, TableFooterState> {
           </div>
         );
     }
+    // get advanced search link
     getAdvancedSearchLink() {
         return <Link className="color-light-blue" to="/">Advanced Security Search</Link>;
     }
+    // get save security traget button
     getSaveSecurityTargetBtn() {
         return <button className="btn btn-light-blue">Save Security Target</button>;
     }
+    // get footer button group buttons
     getActionBtns() {
         return (
           <ButtonGroup
@@ -56,6 +60,7 @@ class TableFooter extends React.Component<TableFooterProps, TableFooterState> {
           />
         );
     }
+    // update searchText state onSearchChange event
     onSearchChange = (e: MyFormEvent) => {
         this.setState({
             searchText: e.target.value

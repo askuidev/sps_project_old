@@ -3,10 +3,12 @@ import ButtonGroup from '../../common/ButtonGroup';
 import { TableControlsProps } from '../../../types';
 
 class TableControls extends React.Component<TableControlsProps, {}> {
+    // callback function for left button group click event
     onLeftGroupClick = (leftGroupActive: string) => {
         const { onLeftGroupClick } = this.props;
         if (onLeftGroupClick) { onLeftGroupClick(leftGroupActive); }
     }
+    // callback function for middle button group click event
     onMiddleGroupClick = (middleGroupActive: string) => {
         const { onMiddleGroupClick } = this.props;
         if (onMiddleGroupClick) { onMiddleGroupClick(middleGroupActive); }

@@ -1,3 +1,11 @@
+/**
+ * Table - It shows the content in the table with rows and columns
+ *
+ * @prop {tableClass} - baseClass to add custom styles to the table component
+ *
+ */
+
+
 import * as React from 'react';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';

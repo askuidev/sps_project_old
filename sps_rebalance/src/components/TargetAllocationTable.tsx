@@ -22,32 +22,40 @@ class TargetAllocationTable extends React.Component<
 > {
   constructor(props: TargetAllocationProps) {
     super(props);
+
+    // setting the default active button
     this.state = {
       leftGroupActive: 'summary',
       middleGroupActive: 'percent'
     };
   }
+  // first time calling the allocationData api to load allocationData
   componentWillMount() {
     this.props.getAllocationData();
   }
+  // setting the default active button on click of left button group
   onLeftGroupClick = (leftGroupActive: string) => {
     this.setState({
       leftGroupActive
     });
   }
+  // setting the default active button on click of middle button group
   onMiddleGroupClick = (middleGroupActive: string) => {
     this.setState({
       middleGroupActive
     });
   }
+  // dispatching the function to handle(open/hide) adjust cash modal on click of 'adjust cash' link in the table row
   onAdjustCashClick = (data: {}) => {
     this.props.handleAdjustCashModal({ type: 'open', data });
   }
+  // dispatching the function to update allocationData on change of percentage and price fields
   onDataChange = ({ value, id, field }: ChangeAllocationData) => {
     const { allocationData } = this.props;
     this.props.updateAllocationTargetData(allocationData, { value, id, field });
     this.props.getAllocationData();
   }
+  // subheader for the panel heading, subheader can be any content
   getSubHeader() {
     const { leftGroupActive, middleGroupActive } = this.state;
     return (
@@ -85,7 +93,7 @@ class TargetAllocationTable extends React.Component<
           <div className="targetAllocationTableControls">
             <span className="pull-left">
               <button className="btn btn-transparent color-light-blue cancel-btn">
-                Cancel 
+                Cancel
               </button>
             </span>
             <span className="pull-right">

@@ -17,11 +17,14 @@ import {
 class AdjustCashModal extends React.Component<AdjustCashModalProps, AdjustCashModalState> {
     constructor(props: AdjustCashModalProps) {
         super(props);
+
+        // setting the default values for the adjust cash form
         this.state = {
             actionType: '',
             actionValue: ''
         };
     }
+    // updating the state data for adjust cash form
     componentWillMount() {
         const { actionType, actionValue } = this.props.adjustCashData;
         this.setState({
@@ -29,21 +32,28 @@ class AdjustCashModal extends React.Component<AdjustCashModalProps, AdjustCashMo
             actionValue
         });
     }
+    // dispatching the hide adjust cash modal action for onModalHide event
     onModalHide = () => {
         this.props.handleAdjustCashModal({ type: 'hide', data: '' });
     }
+    // updating the state data on check of adjust cash form radion buttons
     onCheckChange = (actionType: string, e: MyFormEvent) => {
         this.setState({ actionType });
     }
+    // updating the state data on change of input change
     onValueChange = (e: MyFormEvent) => {
         this.setState({ actionValue: e.target.value.replace(/[^0-9.+0-9$]/g, '') });
     }
+    // updating state data to empty on click of cleat button
     onClearClick = () => {
         this.setState({
             actionType: '',
             actionValue: ''
         });
     }
+    // updating allocationData with the adjust cash form data and
+    // calling the onModalHide callback to hide the modal
+    // on click of submit button
     onSubmitClick = () => {
         const { allocationData, allocationId } = this.props;
         this.props.updateAllocationData(allocationData, { id: allocationId, ...this.state });

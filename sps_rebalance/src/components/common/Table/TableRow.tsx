@@ -12,10 +12,13 @@ import {
 class TableRow extends React.Component<TableRowEntity, TableRowState> {
   constructor(props: TableRowEntity) {
     super(props);
+
+    // setting the default value for the targetPer input
     this.state = {
       targetPer: '0'
     };
   }
+  // updating the default value for targetPer field if exist
   componentWillMount() {
     if (this.props.rowData) {
       this.setState({
@@ -23,9 +26,11 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
       });
     }
   }
+  // get inline style for element
   getStyle(prop: string, value: string | number) {
     return getStyle({ prop, value });
   }
+  // get inline style for element
   getColorBox(color: string) {
     return (
       <span
@@ -34,12 +39,14 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
       />
     );
   }
+  // dispatching the function to handle(open/hide) adjust cash modal on click of 'adjust cash' link in the table row
   onAdjustCashClick = () => {
     const { rowData, onAdjustCashClick } = this.props;
     if (rowData && onAdjustCashClick) {
       onAdjustCashClick(rowData);
     }
   }
+  // adding link to adjust cash label if rowData contains adjustCash setting true
   getAdjustCash(rowData: TableRowDataProps) {
     if (!rowData) {
       return null;
@@ -66,6 +73,7 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
       rowData.description
     );
   }
+  // get input box for the targetPer field
   getTargetPerInput(rowData: TableRowDataProps) {
     const { id, targetPer } = rowData;
     return (
@@ -77,6 +85,7 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
       />
     );
   }
+  // callback function to handle the changed data in the targetper input field
   onTargetPerChange = (id: string | number, e: MyFormEvent) => {
     const { onDataChange } = this.props;
     const field = 'targetPer';
@@ -85,6 +94,7 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
       onDataChange({ value, id, field });
     }
   }
+  // get input box for the targetPrice field
   getTargetPriceInput(rowData: TableRowDataProps) {
     const { id, targetPrice } = rowData;
     return (
@@ -96,6 +106,7 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
       />
     );
   }
+  // callback function to handle the changed data in the targetPrice input field
   onTargetPriceChange = (id: string | number, e: MyFormEvent) => {
     const { onDataChange } = this.props;
     const field = 'targetPrice';
@@ -104,9 +115,11 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
       onDataChange({ value, id, field });
     }
   }
+  // get the checkbox for targetPer field
   getTargetCheckbox(rowData: TableRowDataProps) {
     return <Checkbox id={rowData.id} />;
   }
+  // get the formmatted price for the targetPrice field
   getPriceFormat(rowData: TableRowDataProps, type: string) {
     return getPriceFormat(rowData[type]);
   }
