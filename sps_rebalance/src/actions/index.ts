@@ -35,7 +35,14 @@ interface AdjustCashDataProps {
 
 interface HandleAdjustCashProps {
   type: string;
-  data: string | number;
+  data: HandleAdjustCashDataProps;
+}
+
+interface HandleAdjustCashDataProps {
+  actionType?: string;
+  actionValue?: string;
+  id?: string | number;
+  allocationId?: string | number;
 }
 
 export type Action =
@@ -81,15 +88,15 @@ export type Action =
     }
   | {
       type: 'CLEAR_ADJUST_CASH_DATA',
-      payload: any
+      payload: {}
     }
   | {
       type: 'SHOW_ADJUST_CASH_MODAL',
-      payload: any
+      payload: HandleAdjustCashDataProps
     }
   | {
       type: 'HIDE_ADJUST_CASH_MODAL',
-      payload: any
+      payload: HandleAdjustCashDataProps
     };
 
 export const GET_ALLOCATION_DATA = 'GET_ALLOCATION_DATA';
@@ -170,16 +177,16 @@ export const clearAdjustCashData = (): Action => ({
 
 export const SHOW_ADJUST_CASH_MODAL = 'SHOW_ADJUST_CASH_MODAL';
 export const HIDE_ADJUST_CASH_MODAL = 'HIDE_ADJUST_CASH_MODAL';
-export const handleAdjustCashModal = (props: HandleAdjustCashProps): Action => {
-  if (props.type === 'open') {
+export const handleAdjustCashModal = ({type, data}: HandleAdjustCashProps): Action => {
+  if (type === 'open') {
     return {
       type: SHOW_ADJUST_CASH_MODAL,
-      payload: props.data
+      payload: data
     };
   } else {
     return {
       type: HIDE_ADJUST_CASH_MODAL,
-      payload: props.data
+      payload: data
     };
   }
 };

@@ -2,8 +2,8 @@ import * as React from 'react';
 import { CheckboxProps } from '../../types';
 
 /**
-* Checkbox - A styled checkbox component
-*/
+ * Checkbox - A styled checkbox component
+ */
 export default class Checkbox extends React.Component<CheckboxProps, {}> {
     onChange = (id: string | number, e: object) => {
         if (this.props.onChange) {

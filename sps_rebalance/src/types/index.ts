@@ -14,6 +14,13 @@ export interface TableRowDataProps {
   driftPer: string;
 }
 
+export interface HandleAdjustCashDataProps {
+  actionType?: string;
+  actionValue?: string;
+  id?: string | number;
+  allocationId?: string | number;
+}
+
 // PropTypes for TargetAllocationTable component
 export interface TargetAllocationProps {
   getAllocationData: () => void;
@@ -36,7 +43,7 @@ export interface TargetAllocationState {
 // PropTypes for AdjustCashModal Data
 export interface AdjustCashModalEntity {
   type: string;
-  data: any;
+  data: HandleAdjustCashDataProps;
 }
 
 // PropTypes for changed allocationData fields

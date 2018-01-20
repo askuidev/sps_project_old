@@ -9,7 +9,6 @@ import {
   DiffAllocationTableProps
 } from '../types';
 
-
 /**
  * TableRow - Table row component for the table
  */
