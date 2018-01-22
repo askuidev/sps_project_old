@@ -51,7 +51,6 @@ export const getUpdatedAllocationData = (arr: AllocationDataProps[], data: Adjus
     });
 };
 
-
 /**
  * getUpdatedTargetData - update any key in the allocationData array
  *
@@ -70,7 +69,6 @@ export const getUpdatedTargetData = (arr: AllocationDataProps[], data: ChangeAll
     });
 };
 
-
 /**
  * getAdjustCashFormData - Get adjustCash data by clicked row data id
  *                         when user clicks on the adjustCash link in the table
@@ -84,7 +82,6 @@ export const getUpdatedTargetData = (arr: AllocationDataProps[], data: ChangeAll
 export const getAdjustCashFormData = (arr: AllocationDataProps[], data: AdjustCashDataProps) => {
     return arr.filter(obj => data.id === obj.id)[0];
 };
-
 
 /**
  * getStyle - Creates a style object for the element
@@ -132,9 +129,10 @@ export const getPriceFormat = (price: {}, code = 'USD') => {
  * @returns {type} sum of the provided field
  */
 export const getCalculatedTotal = (data: AllocationDataProps[], field: string) => {
-    const total = data.reduceRight((prevValue, obj) => {
+    const callback = (prevValue: number, obj: {}) => {
         return prevValue + +obj[field];
-    }, 0);
+    };
+    const total = data.reduceRight(callback, 0);
     return total.toFixed(2);
 };
 
