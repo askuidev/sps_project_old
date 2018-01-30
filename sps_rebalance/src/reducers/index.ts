@@ -4,6 +4,9 @@ import * as Actions from '../actions';
 import config from '../config';
 import axios from 'axios';
 const axiosMiddleware = require('redux-axios-middleware').default;
+import {
+    doAllCalculations
+} from '../utils';
 
 const { baseUrl } = config.dev;
 
@@ -54,7 +57,18 @@ const reducer = (state: InitialStateProps = initialState, action: Action) => {
              *
              * @returns {object}  - state object with allocationData
              */
-            state = Object.assign({}, state, { allocationData: action.payload.data });
+            const allocData = action.payload.data;
+            const calculatedData = doAllCalculations(allocData);
+            state = Object.assign({}, state, { allocationData: calculatedData });
+            break;
+        case Actions.UPDATE_ALLOCATION_DATA_SUCCESS:
+            /**
+             * this case will execute once
+             * the [GET] request for [allocationData] api got success
+             * @param action.payload.data will contain the response from the api
+             *
+             * @returns {object}  - state object with allocationData
+             */
             break;
         case Actions.GET_ASSET_DATA_SUCCESS:
             /**

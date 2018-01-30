@@ -56,7 +56,12 @@ class AdjustCashModal extends React.Component<AdjustCashModalProps, AdjustCashMo
     // on click of submit button
     onSubmitClick = () => {
         const { allocationData, allocationId } = this.props;
-        this.props.updateAllocationData(allocationData, { id: allocationId, ...this.state });
+        const actionSuccess = this.props.updateAllocationData(allocationData, { id: allocationId, ...this.state });
+        actionSuccess.then(status => {
+            if (this.props.getAllData) {
+              this.props.getAllData();
+            }
+        });
         this.onModalHide();
     }
     render() {

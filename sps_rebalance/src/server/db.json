@@ -5,14 +5,14 @@
       "adjustCash": true,
       "symbol": "",
       "description": "CASH",
-      "value": "21716.67",
-      "currentPer": "21.12",
-      "targetPer": "10.28",
-      "targetPrice": "10282.7",
-      "driftPer": "11.12",
-      "buySellPrice": "11433.89",
-      "actionType": "Withdraw",
-      "actionValue": "123221"
+      "value": "258000",
+      "currentPer": "76.081",
+      "targetPer": "10",
+      "targetPrice": "342502.241",
+      "driftPer": "-24.919",
+      "buySellPrice": "-84502.241",
+      "actionType": "",
+      "actionValue": ""
     },
     {
       "id": "2",

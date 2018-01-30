@@ -251,7 +251,9 @@ export interface AdjustCashModalProps {
   mainClass: string;
   showAdjustCashModal: boolean;
   handleAdjustCashModal: (props: HandleAdjustCashModalProps) => void;
-  updateAllocationData: (allocationData: TableRowDataProps[], props: AdjustCashDataProps) => void;
+  updateAllocationData: (allocationData: TableRowDataProps[], props: AdjustCashDataProps) => Promise<{}>;
+  getAllData: () => void;
+  getAdjustCashData: () => {};
 }
 
 // PropTypes for AdjustCashModal component state

@@ -40,14 +40,47 @@ interface GetStyleProps {
  *
  * @returns {type} updated allocationData with adjustCash data
  */
-export const getUpdatedAllocationData = (arr: AllocationDataProps[], data: AdjustCashDataProps) => {
+export const getUpdatedAllocationData = (arr: AllocationDataProps[], data?: AdjustCashDataProps) => {
     return arr.filter((obj) => {
-        if (data.id === obj.id) {
+        if (data && ( data.id === obj.id )) {
             obj.actionType = data.actionType;
             obj.actionValue = data.actionValue;
             return true;
+        } else if ( obj.adjustCash ) {
+            if (obj.actionType.toLowerCase() === 'addition') {
+              const val = +obj.value + +obj.actionValue;
+              obj.value = val.toString();
+              return true;
+            } else {
+              const val = +obj.value - +obj.actionValue;
+              obj.value = val.toString();
+              return true;
+            }
         }
         return false;
+    });
+};
+
+/**
+ * doAllCalculations - calculations related to TargetAllocationTable
+ *
+ * @param {type} arr  allocationData array
+ *
+ * @returns {type} updated allocationData with calculated data
+ */
+export const doAllCalculations = (arr: AllocationDataProps[]) => {
+    const calculatedTotal = getCalculatedTotal(arr, 'value');
+    return arr.map(obj => {
+        const { value, targetPer } = obj;
+        const updatedCurrentPercent: number = (+value / +calculatedTotal) * 100;
+        const updatedTargetPrice: number = (+targetPer / 100) * +calculatedTotal;
+        const driftPer = updatedCurrentPercent - +targetPer;
+        const updatedDriftPrice: number = (+driftPer / 100) * +calculatedTotal;
+        obj.currentPer = updatedCurrentPercent.toFixed(3).toString();
+        obj.targetPrice = updatedTargetPrice.toFixed(3).toString();
+        obj.driftPer = driftPer.toFixed(3).toString();
+        obj.buySellPrice = updatedDriftPrice.toFixed(3).toString();
+        return obj;
     });
 };
 

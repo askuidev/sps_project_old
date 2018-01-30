@@ -50,7 +50,7 @@ class ReactModal extends React.Component<ModalProps, {}> {
     render() {
         // adding draggable feature to the modal component based on the draggable prop
         return this.props.draggable ? (
-            <Draggable>
+            <Draggable disabled={true}>
                 {this.renderModal()}
             </Draggable>
         ) : (
