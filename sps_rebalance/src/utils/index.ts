@@ -62,29 +62,6 @@ export const getUpdatedAllocationData = (arr: AllocationDataProps[], data?: Adju
 };
 
 /**
- * doAllCalculations - calculations related to TargetAllocationTable
- *
- * @param {type} arr  allocationData array
- *
- * @returns {type} updated allocationData with calculated data
- */
-export const doAllCalculations = (arr: AllocationDataProps[]) => {
-    const calculatedTotal = getCalculatedTotal(arr, 'value');
-    return arr.map(obj => {
-        const { value, targetPer } = obj;
-        const updatedCurrentPercent: number = (+value / +calculatedTotal) * 100;
-        const updatedTargetPrice: number = (+targetPer / 100) * +calculatedTotal;
-        const driftPer = updatedCurrentPercent - +targetPer;
-        const updatedDriftPrice: number = (+driftPer / 100) * +calculatedTotal;
-        obj.currentPer = updatedCurrentPercent.toFixed(3).toString();
-        obj.targetPrice = updatedTargetPrice.toFixed(3).toString();
-        obj.driftPer = driftPer.toFixed(3).toString();
-        obj.buySellPrice = updatedDriftPrice.toFixed(3).toString();
-        return obj;
-    });
-};
-
-/**
  * getUpdatedTargetData - update any key in the allocationData array
  *
  * @param {type} arr  allocationData array
@@ -169,11 +146,35 @@ export const getCalculatedTotal = (data: AllocationDataProps[], field: string) =
     return total.toFixed(2);
 };
 
+/**
+ * doAllCalculations - calculations related to TargetAllocationTable
+ *
+ * @param {type} arr  allocationData array
+ *
+ * @returns {type} updated allocationData with calculated data
+ */
+export const doAllCalculations = (arr: AllocationDataProps[]) => {
+    const calculatedTotal = getCalculatedTotal(arr, 'value');
+    return arr.map(obj => {
+        const { value, targetPer } = obj;
+        const updatedCurrentPercent: number = (+value / +calculatedTotal) * 100;
+        const updatedTargetPrice: number = (+targetPer / 100) * +calculatedTotal;
+        const driftPer = updatedCurrentPercent - +targetPer;
+        const updatedDriftPrice: number = (+driftPer / 100) * +calculatedTotal;
+        obj.currentPer = updatedCurrentPercent.toFixed(3).toString();
+        obj.targetPrice = updatedTargetPrice.toFixed(3).toString();
+        obj.driftPer = driftPer.toFixed(3).toString();
+        obj.buySellPrice = updatedDriftPrice.toFixed(3).toString();
+        return obj;
+    });
+};
+
 export default {
     getUpdatedAllocationData,
     getUpdatedTargetData,
     getStyle,
     getStyles,
     getPriceFormat,
-    getCalculatedTotal
+    getCalculatedTotal,
+    doAllCalculations
 };
