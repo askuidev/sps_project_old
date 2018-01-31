@@ -20,7 +20,7 @@ class ReactModal extends React.Component<ModalProps, {}> {
           children,
           titleText = 'Title',
           showModal,
-          backdrop = true,
+          backdrop = false,
         } = this.props;
         return (
             <Modal
@@ -50,7 +50,9 @@ class ReactModal extends React.Component<ModalProps, {}> {
     render() {
         // adding draggable feature to the modal component based on the draggable prop
         return this.props.draggable ? (
-            <Draggable disabled={true}>
+            <Draggable
+                handle=".modal-header"
+            >
                 {this.renderModal()}
             </Draggable>
         ) : (

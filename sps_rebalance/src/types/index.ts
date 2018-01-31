@@ -192,6 +192,7 @@ export interface ModalProps {
   onSubmitClick?: () => void;
   draggable?: boolean;
   backdrop?: boolean;
+  handle?: string;
 }
 
 // PropTypes for Checkbox component props

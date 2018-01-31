@@ -15,7 +15,7 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
 
     // setting the default value for the targetPer input
     this.state = {
-      targetPer: '0'
+      targetPer: ''
     };
   }
   // updating the default value for targetPer field if exist
@@ -74,14 +74,13 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
     );
   }
   // get input box for the targetPer field
-  getTargetPerInput(rowData: TableRowDataProps) {
-    const { id, targetPer } = rowData;
+  getTargetPerInput(id: string | number) {
     return (
       <input
         type="text"
         className="form-control target-percent-input"
         onChange={this.onTargetPerChange.bind(this, id)}
-        value={targetPer}
+        value={this.state.targetPer}
       />
     );
   }
@@ -89,8 +88,11 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
   onTargetPerChange = (id: string | number, e: MyFormEvent) => {
     const { onDataChange } = this.props;
     const field = 'targetPer';
-    let value = e.target.value.replace(/[^0-9.+0-9$]/g, '') || 0;
+    let value = e.target.value.replace(/[^0-9.+0-9$]/g, '') || '';
     if (onDataChange) {
+      this.setState({
+        targetPer: value.toString()
+      });
       onDataChange({ value, id, field });
     }
   }
@@ -133,7 +135,7 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
         <td>{rowData.currentPer}</td>
         <td className="text-center">
           {fieldType === 'percent'
-            ? this.getTargetPerInput(rowData)
+            ? this.getTargetPerInput(rowData.id)
             : rowData.targetPer}
         </td>
         <td>

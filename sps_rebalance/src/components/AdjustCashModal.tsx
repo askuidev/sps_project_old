@@ -34,6 +34,9 @@ class AdjustCashModal extends React.Component<AdjustCashModalProps, AdjustCashMo
     }
     // dispatching the hide adjust cash modal action for onModalHide event
     onModalHide = () => {
+        if (this.props.getAllData) {
+          this.props.getAllData();
+        }
         this.props.handleAdjustCashModal({ type: 'hide', data: '' });
     }
     // updating the state data on check of adjust cash form radion buttons
@@ -62,7 +65,6 @@ class AdjustCashModal extends React.Component<AdjustCashModalProps, AdjustCashMo
               this.props.getAllData();
             }
         });
-        this.onModalHide();
     }
     render() {
         const {

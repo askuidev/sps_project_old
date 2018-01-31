@@ -48,6 +48,7 @@ class TargetAllocationTable extends React.Component<
   }
   // dispatching the function to handle(open/hide) adjust cash modal on click of 'adjust cash' link in the table row
   onAdjustCashClick = (data: {}) => {
+    this.updateAllData();
     this.props.handleAdjustCashModal({ type: 'open', data });
   }
   // dispatching the function to update allocationData on change of percentage and price fields
@@ -81,7 +82,7 @@ class TargetAllocationTable extends React.Component<
         {showAdjustCashModal ? (
           <AdjustCashModal
             showAdjustCashModal={showAdjustCashModal}
-            updateAllData={this.updateAllData}
+            getAllData={this.updateAllData}
           />
         ) : (
           ''
