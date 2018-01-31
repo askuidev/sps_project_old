@@ -52,10 +52,13 @@ class TargetAllocationTable extends React.Component<
     this.props.handleAdjustCashModal({ type: 'open', data });
   }
   // dispatching the function to update allocationData on change of percentage and price fields
-  onDataChange = ({ value, id, field }: ChangeAllocationData) => {
+  onDataChange = ({ value, id, field }: ChangeAllocationData, callback: () => void) => {
     const { allocationData } = this.props;
-    this.props.updateAllocationTargetData(allocationData, { value, id, field });
-    this.props.getAllocationData();
+    const updateSuccess = this.props.updateAllocationTargetData(allocationData, { value, id, field });
+    updateSuccess.then(() => {
+      callback();
+      this.props.getAllocationData();
+    });
   }
   // subheader for the panel heading, subheader can be any content
   getSubHeader() {

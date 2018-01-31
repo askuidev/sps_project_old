@@ -90,10 +90,13 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
     const field = 'targetPer';
     let value = e.target.value.replace(/[^0-9.+0-9$]/g, '') || '';
     if (onDataChange) {
-      this.setState({
-        targetPer: value.toString()
-      });
-      onDataChange({ value, id, field });
+      onDataChange({ value, id, field },
+          () => {
+            this.setState({
+              targetPer: value.toString()
+            });
+          }
+      );
     }
   }
   // get input box for the targetPrice field

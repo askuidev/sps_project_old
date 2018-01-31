@@ -23,12 +23,12 @@ export interface HandleAdjustCashDataProps {
 
 // PropTypes for TargetAllocationTable component
 export interface TargetAllocationProps {
-  getAllocationData: () => void;
+  getAllocationData: () => Promise<{}>;
   handleAdjustCashModal: (props: AdjustCashModalEntity) => void;
   updateAllocationTargetData: (
     allocationData: TableRowDataProps[],
     props: ChangeAllocationData
-  ) => void;
+  ) => Promise<{}>;
   allocationData: TableRowDataProps[];
   allocationId: string;
   showAdjustCashModal: boolean;
@@ -75,7 +75,7 @@ export interface DiffAllocationTableRowProps {
 
 // PropTypes for callback function
 export interface CallbackProps {
-  (params: object): void;
+  (param1: object, param2?: () => void): void;
 }
 
 // PropTypes for TableRow component props
@@ -127,12 +127,16 @@ export interface TableCellProps {
   field?: string;
 }
 
+export interface TableBodyCallbackProps {
+  (param1: TableCellProps, param2?: () => void): void;
+}
+
 // PropTypes for TableBody component props
 export interface TableBodyProps {
   allocationData?: TableRowDataProps[];
   fieldType?: string;
   onAdjustCashClick?: (allocationData: TableRowDataProps) => void;
-  onDataChange?: (params: TableCellProps) => void;
+  onDataChange?: TableBodyCallbackProps;
 }
 
 // PropTypes for NoDataRow component props
@@ -141,13 +145,17 @@ export interface NoDataRowProps {
   message: string;
 }
 
+export interface TableCallbackProps {
+  (param1: TableCellProps, param2?: () => void): void;
+}
+
 // PropTypes for Table component props
 export interface TableProps {
   tableClass?: string;
   fieldType?: string;
   allocationData: TableRowDataProps[];
   onAdjustCashClick?: (params: TableRowDataProps) => void;
-  onDataChange?: (params: TableCellProps) => void;
+  onDataChange?: TableCallbackProps;
 }
 
 // PropTypes for ButtonGroup component props
@@ -253,7 +261,7 @@ export interface AdjustCashModalProps {
   showAdjustCashModal: boolean;
   handleAdjustCashModal: (props: HandleAdjustCashModalProps) => void;
   updateAllocationData: (allocationData: TableRowDataProps[], props: AdjustCashDataProps) => Promise<{}>;
-  getAllData: () => void;
+  getAllData: () => Promise<{}>;
   getAdjustCashData: () => {};
 }
 
