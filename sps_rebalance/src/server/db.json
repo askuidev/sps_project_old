@@ -5,14 +5,14 @@
       "adjustCash": true,
       "symbol": "",
       "description": "CASH",
-      "value": "-11802000",
-      "currentPer": "100.692",
-      "targetPer": "21",
-      "targetPrice": "-234397.777",
-      "driftPer": "98.692",
-      "buySellPrice": "-11566602.223",
-      "actionType": "Withdraw",
-      "actionValue": "1000"
+      "value": "5362000",
+      "currentPer": "98.510",
+      "targetPer": 22,
+      "targetPrice": 1197484.44,
+      "driftPer": "76.510",
+      "buySellPrice": "4164515.551",
+      "actionType": "",
+      "actionValue": ""
     },
     {
       "id": "2",
@@ -21,10 +21,10 @@
       "description": "FIDELITY TOTAL BOND FUND",
       "value": "8637.31",
       "currentPer": "-0.074",
-      "targetPer": "32",
-      "targetPrice": "-351626.666",
-      "driftPer": "-3.074",
-      "buySellPrice": "360263.976",
+      "targetPer": 22,
+      "targetPrice": "-2602037.329",
+      "driftPer": "-22.274",
+      "buySellPrice": "2610674.639",
       "actionType": "Addition",
       "actionValue": "321312"
     },
@@ -35,10 +35,10 @@
       "description": "WISDOMTREE FNDMNTL BOND",
       "value": "16955.34",
       "currentPer": "-0.145",
-      "targetPer": "18.",
-      "targetPrice": "-2168364.441",
-      "driftPer": "-18.645",
-      "buySellPrice": "2185319.781"
+      "targetPer": "14",
+      "targetPrice": "-1640924.442",
+      "driftPer": "-14.145",
+      "buySellPrice": "1657879.782"
     },
     {
       "id": "4",

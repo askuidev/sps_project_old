@@ -68,13 +68,7 @@ export type Action =
     }
   | {
       type: 'UPDATE_ALLOCATION_DATA',
-      payload: {
-        request: AxiosRequestConfig
-      }
-    }
-  | {
-      type: 'UPDATE_ALLOCATION_DATA_SUCCESS',
-      payload: AxiosResponse
+      payload: AllocationDataProps[]
     }
   | {
       type: 'UPDATE_ALLOCATION_TARGET_DATA',
@@ -124,8 +118,6 @@ export const getAssetData = (): Action => ({
 });
 
 export const UPDATE_ALLOCATION_DATA = 'UPDATE_ALLOCATION_DATA';
-export const UPDATE_ALLOCATION_DATA_SUCCESS = 'UPDATE_ALLOCATION_DATA_SUCCESS';
-export const UPDATE_ALLOCATION_DATA_FAIL = 'UPDATE_ALLOCATION_DATA_FAIL';
 export const updateAllocationData = (
   allocationData: AllocationDataProps[],
   data: AdjustCashDataProps
@@ -133,15 +125,7 @@ export const updateAllocationData = (
   const updatedAllocationData = getUpdatedAllocationData(allocationData, data);
   return {
     type: UPDATE_ALLOCATION_DATA,
-    payload: {
-      request: {
-        method: 'PUT',
-        url: allocationDataUrl + '/' + data.id,
-        data: {
-          ...updatedAllocationData[0]
-        }
-      }
-    }
+    payload: updatedAllocationData
   };
 };
 

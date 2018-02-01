@@ -34,9 +34,6 @@ class AdjustCashModal extends React.Component<AdjustCashModalProps, AdjustCashMo
     }
     // dispatching the hide adjust cash modal action for onModalHide event
     onModalHide = () => {
-        if (this.props.getAllData) {
-          this.props.getAllData();
-        }
         this.props.handleAdjustCashModal({ type: 'hide', data: '' });
     }
     // updating the state data on check of adjust cash form radion buttons
@@ -45,7 +42,10 @@ class AdjustCashModal extends React.Component<AdjustCashModalProps, AdjustCashMo
     }
     // updating the state data on change of input change
     onValueChange = (e: MyFormEvent) => {
-        this.setState({ actionValue: e.target.value.replace(/[^0-9.+0-9$]/g, '') });
+        const val = e.target.value ? parseFloat(e.target.value) : '';
+        if( (val && !isNaN(val)) || val === '') {
+            this.setState({ actionValue: val.toString()});
+        }
     }
     // updating state data to empty on click of cleat button
     onClearClick = () => {
@@ -59,9 +59,18 @@ class AdjustCashModal extends React.Component<AdjustCashModalProps, AdjustCashMo
     // on click of submit button
     onSubmitClick = () => {
         const { allocationData, allocationId } = this.props;
-        const actionSuccess = this.props.updateAllocationData(allocationData, { id: allocationId, ...this.state });
-        actionSuccess.then(status => {
-            if (this.props.getAllData) {
+        const { actionType, actionValue } = this.state;
+        let updatedValue;
+        if (!actionValue) {
+            updatedValue = actionValue;
+        } else {
+            updatedValue = (actionType === 'Addition') ? actionValue : -actionValue;
+        }
+        const actionObj = { actionType, actionValue: updatedValue.toString() };
+        const actionStatus = this.props.getAllData();
+        actionStatus.then(status => {
+            this.props.updateAllocationData(allocationData, { id: allocationId, ...actionObj });
+            if(!this.state.actionValue) {
               this.props.getAllData();
             }
         });

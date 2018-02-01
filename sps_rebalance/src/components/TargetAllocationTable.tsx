@@ -15,7 +15,6 @@ import {
   TargetAllocationState,
   ChangeAllocationData
 } from '../types';
-import { getUpdatedAllocationData } from '../utils';
 
 class TargetAllocationTable extends React.Component<
   TargetAllocationProps,
@@ -48,7 +47,7 @@ class TargetAllocationTable extends React.Component<
   }
   // dispatching the function to handle(open/hide) adjust cash modal on click of 'adjust cash' link in the table row
   onAdjustCashClick = (data: {}) => {
-    this.updateAllData();
+    //this.updateAllData();
     this.props.handleAdjustCashModal({ type: 'open', data });
   }
   // dispatching the function to update allocationData on change of percentage and price fields
@@ -74,12 +73,11 @@ class TargetAllocationTable extends React.Component<
   }
   // call this method to get updated data from the server
   updateAllData = () => {
-    this.props.getAllocationData();
+    return this.props.getAllocationData();
   }
   render() {
-    const { showAdjustCashModal } = this.props;
+    const { showAdjustCashModal, allocationData } = this.props;
     const { middleGroupActive } = this.state;
-    const updatedAllocationData = getUpdatedAllocationData(this.props.allocationData);
     return (
       <div className="allocationTableContainer" id="allocationTableContainer">
         {showAdjustCashModal ? (
@@ -100,7 +98,7 @@ class TargetAllocationTable extends React.Component<
               fieldType={middleGroupActive}
               onAdjustCashClick={this.onAdjustCashClick}
               onDataChange={this.onDataChange}
-              allocationData={updatedAllocationData}
+              allocationData={allocationData}
               {...this.props}
             />
           </div>

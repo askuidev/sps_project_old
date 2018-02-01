@@ -61,7 +61,7 @@ const reducer = (state: InitialStateProps = initialState, action: Action) => {
             const calculatedData = doAllCalculations(allocData);
             state = Object.assign({}, state, { allocationData: calculatedData });
             break;
-        case Actions.UPDATE_ALLOCATION_DATA_SUCCESS:
+        case Actions.UPDATE_ALLOCATION_DATA:
             /**
              * this case will execute once
              * the [GET] request for [allocationData] api got success
@@ -69,6 +69,7 @@ const reducer = (state: InitialStateProps = initialState, action: Action) => {
              *
              * @returns {object}  - state object with allocationData
              */
+            state = Object.assign({}, state, { allocationData: action.payload });
             break;
         case Actions.GET_ASSET_DATA_SUCCESS:
             /**

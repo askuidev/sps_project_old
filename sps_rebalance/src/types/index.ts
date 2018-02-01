@@ -89,6 +89,7 @@ export interface TableRowEntity {
 // PropTypes for TableRow component state
 export interface TableRowState {
   targetPer?: string;
+  targetPrice?: string;
 }
 
 // PropTypes for callback event object

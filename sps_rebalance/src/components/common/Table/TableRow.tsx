@@ -15,7 +15,8 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
 
     // setting the default value for the targetPer input
     this.state = {
-      targetPer: ''
+      targetPer: '',
+      targetPrice: ''
     };
   }
   // updating the default value for targetPer field if exist
@@ -77,7 +78,7 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
   getTargetPerInput(id: string | number) {
     return (
       <input
-        type="text"
+        type="number"
         className="form-control target-percent-input"
         onChange={this.onTargetPerChange.bind(this, id)}
         value={this.state.targetPer}
@@ -88,13 +89,13 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
   onTargetPerChange = (id: string | number, e: MyFormEvent) => {
     const { onDataChange } = this.props;
     const field = 'targetPer';
-    let value = e.target.value.replace(/[^0-9.+0-9$]/g, '') || '';
+    const value = e.target.value ? parseFloat(e.target.value) : '';
     if (onDataChange) {
       onDataChange({ value, id, field },
           () => {
-            this.setState({
-              targetPer: value.toString()
-            });
+            if( (value && !isNaN(value)) || value === '') {
+                this.setState({ targetPer: value.toString()});
+            }
           }
       );
     }
@@ -104,7 +105,7 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
     const { id, targetPrice } = rowData;
     return (
       <input
-        type="text"
+        type="number"
         className="form-control target-price-input"
         onChange={this.onTargetPriceChange.bind(this, id)}
         value={targetPrice}
@@ -115,9 +116,15 @@ class TableRow extends React.Component<TableRowEntity, TableRowState> {
   onTargetPriceChange = (id: string | number, e: MyFormEvent) => {
     const { onDataChange } = this.props;
     const field = 'targetPrice';
-    let value = e.target.value.replace(/[^0-9.+0-9$]/g, '') || 0;
+    const value = e.target.value ? parseFloat(e.target.value) : '';
     if (onDataChange) {
-      onDataChange({ value, id, field });
+      onDataChange({ value, id, field },
+          () => {
+            if( (value && !isNaN(value)) || value === '') {
+                this.setState({ targetPrice: value.toString()});
+            }
+          }
+      );
     }
   }
   // get the checkbox for targetPer field

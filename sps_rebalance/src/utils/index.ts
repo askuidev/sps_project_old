@@ -33,6 +33,45 @@ interface GetStyleProps {
 }
 
 /**
+ * getCalculatedTotal - Get the sum of [field]s in the allocationData array
+ *
+ * @param {type} data  allocationData array
+ * @param {type} field allocationData field name
+ *
+ * @returns {type} sum of the provided field
+ */
+export const getCalculatedTotal = (data: AllocationDataProps[], field: string) => {
+    const callback = (prevValue: number, obj: {}) => {
+        return prevValue + +obj[field];
+    };
+    const total = data.reduceRight(callback, 0);
+    return total.toFixed(2);
+};
+
+/**
+ * doAllCalculations - calculations related to TargetAllocationTable
+ *
+ * @param {type} arr  allocationData array
+ *
+ * @returns {type} updated allocationData with calculated data
+ */
+export const doAllCalculations = (arr: AllocationDataProps[]) => {
+    const calculatedTotal = getCalculatedTotal(arr, 'value');
+    return arr.map(obj => {
+        const { value, targetPer } = obj;
+        const updatedCurrentPercent: number = (+value / +calculatedTotal) * 100;
+        const updatedTargetPrice: number = (+targetPer / 100) * +calculatedTotal;
+        const driftPer = updatedCurrentPercent - +targetPer;
+        const updatedDriftPrice: number = (+driftPer / 100) * +calculatedTotal;
+        obj.currentPer = updatedCurrentPercent.toFixed(3).toString();
+        obj.targetPrice = updatedTargetPrice.toFixed(3).toString();
+        obj.driftPer = driftPer.toFixed(3).toString();
+        obj.buySellPrice = updatedDriftPrice.toFixed(3).toString();
+        return obj;
+    });
+};
+
+/**
  * getUpdatedAllocationData - add/update actionType and actionValue
  *
  * @param {type} arr  allocationData array
@@ -41,24 +80,22 @@ interface GetStyleProps {
  * @returns {type} updated allocationData with adjustCash data
  */
 export const getUpdatedAllocationData = (arr: AllocationDataProps[], data?: AdjustCashDataProps) => {
-    return arr.filter((obj) => {
+    console.log(data);
+    const updatedArr = arr.filter((obj) => {
         if (data && ( data.id === obj.id )) {
             obj.actionType = data.actionType;
             obj.actionValue = data.actionValue;
+            const val = +obj.value + +obj.actionValue;
+            obj.value = val.toString();
             return true;
-        } else if ( obj.adjustCash ) {
-            if (obj.actionType.toLowerCase() === 'addition') {
-              const val = +obj.value + +obj.actionValue;
-              obj.value = val.toString();
-              return true;
-            } else {
-              const val = +obj.value - +obj.actionValue;
-              obj.value = val.toString();
-              return true;
-            }
         }
-        return false;
+        return true;
     });
+    if (data && !data.actionValue) {
+        return updatedArr;
+    } else {
+        return doAllCalculations(updatedArr);
+    }
 };
 
 /**
@@ -128,45 +165,6 @@ export const getStyles = (styles = []) => {
  */
 export const getPriceFormat = (price: {}, code = 'USD') => {
     return CurrencyFormatter.format(price, { code });
-};
-
-/**
- * getCalculatedTotal - Get the sum of [field]s in the allocationData array
- *
- * @param {type} data  allocationData array
- * @param {type} field allocationData field name
- *
- * @returns {type} sum of the provided field
- */
-export const getCalculatedTotal = (data: AllocationDataProps[], field: string) => {
-    const callback = (prevValue: number, obj: {}) => {
-        return prevValue + +obj[field];
-    };
-    const total = data.reduceRight(callback, 0);
-    return total.toFixed(2);
-};
-
-/**
- * doAllCalculations - calculations related to TargetAllocationTable
- *
- * @param {type} arr  allocationData array
- *
- * @returns {type} updated allocationData with calculated data
- */
-export const doAllCalculations = (arr: AllocationDataProps[]) => {
-    const calculatedTotal = getCalculatedTotal(arr, 'value');
-    return arr.map(obj => {
-        const { value, targetPer } = obj;
-        const updatedCurrentPercent: number = (+value / +calculatedTotal) * 100;
-        const updatedTargetPrice: number = (+targetPer / 100) * +calculatedTotal;
-        const driftPer = updatedCurrentPercent - +targetPer;
-        const updatedDriftPrice: number = (+driftPer / 100) * +calculatedTotal;
-        obj.currentPer = updatedCurrentPercent.toFixed(3).toString();
-        obj.targetPrice = updatedTargetPrice.toFixed(3).toString();
-        obj.driftPer = driftPer.toFixed(3).toString();
-        obj.buySellPrice = updatedDriftPrice.toFixed(3).toString();
-        return obj;
-    });
 };
 
 export default {

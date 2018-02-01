@@ -9,7 +9,8 @@ import { AdjustCashFormProps } from '../types';
 class AdjustCashForm extends React.Component<AdjustCashFormProps, {}> {
     render() {
         const {
-          mainClass = ''
+          mainClass = '',
+          actionValue = ''
         } = this.props;
         return (
             <div className={'form-horizontal col-sm-12 adjustCashForm ' + mainClass}>
@@ -29,10 +30,11 @@ class AdjustCashForm extends React.Component<AdjustCashFormProps, {}> {
                     <div className="form-group">
                         <div className="input-group">
                             <input
+                                type="number"
                                 className="form-control"
                                 placeholder="Enter value"
                                 onChange={this.props.onValueChange}
-                                value={this.props.actionValue || ''}
+                                value={actionValue}
                             />
                             <span className="input-group-btn">
                                 <button
